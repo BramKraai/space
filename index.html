@@ -1,42 +1,46 @@
 <html>
     <head>
-
         <title>SPACE</title>
 
         <meta charset="UTF-8">
         <meta name="description" content="SPACE">
         <meta name="author" content="Bram Kraaijeveld">
 
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Codystar&display=swap" rel="stylesheet">
-
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        
         <link href="css/main.css" rel="stylesheet">
     </head>
 
     <body>
 
+        <header>
+                <a href="index.html"><div class="title">SPACE</div></a>
+        </header>
+
         <main>
             <div class="game">
+
                 <canvas class="canvas" id="canvas"></canvas>
+
                 <div class="overlay"><i id="fullscreen" class="material-icons">fullscreen</i></div>
 
                 <footer>
-                    <a href="https://github.com/BramKraai/space"><div class="github">
-                        <img id="github-icon" src="img/GitHub-Mark-Light-64px.png">
-                    </div></a>
+                    <a href="https://github.com/BramKraai/space">
+                        <div class="github">
+                            <img id="github-icon" src="img/GitHub-Mark-Light-64px.png">
+                        </div>
+                    </a>
                 </footer>
 
             </div>
         </main>
-
-        <header>
-                <a href="index.html"><div class="title">SPACE</div></a>
-        </header>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js"></script>
         
         <script src="js/utils.js"></script>
+        <script src="js/game.js"></script>
         <script src="js/main.js"></script>
 
     </body>

@@ -1,0 +1,66 @@
+body {
+    margin: 0;
+
+    background-color: #111;
+    font-family: 'Codystar', cursive;
+    color: white;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+}
+
+header, footer {
+    background-color: #222;
+    position: absolute; width: 100%;
+    padding: 5px 0 5px 0;
+
+    text-align: center;
+}
+
+header { top: 0; font-size: 20px; }
+footer { bottom: 0; color: #999; font-size: 10px;}
+
+.game {
+    position: absolute;
+    
+    --scale-factor: 0.8;
+
+    /* Center Vertically */
+    margin: 0; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.overlay {
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+    cursor: default;
+}
+
+.material-icons {
+    color: #333;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+#fullscreen { float: right; margin-right: 5px;}
+
+/* Maintain 16:9 Aspect Ratio */
+@media (max-aspect-ratio:16/9) {
+    .game { width: calc(var(--scale-factor) * 100vw); height: calc(var(--scale-factor) * 56.25vw); }
+}
+@media (min-aspect-ratio:16/9) {
+    .game { width: calc(var(--scale-factor) * 177.77vh); height: calc(var(--scale-factor) * 100vh); }
+}
+
+.canvas {
+    background-color: black;
+
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+
+    width: 100%;
+    height: 100%;
+}

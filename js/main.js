@@ -1,4 +1,8 @@
-'use strict'
+'use strict';
+
+const GAME_WINDOW_SCALE_FACTOR = $(".game").css('--scale-factor');
+const BACKGROUND_COLOR = $("body").css('--background-color');
+
 
 $('#fullscreen').click(function () {
     if (document.fullscreenElement) closeFullscreen();
@@ -9,9 +13,11 @@ document.documentElement.onfullscreenchange = function() {
     if (document.fullscreenElement) {
         $('#fullscreen').text('fullscreen_exit');
         $(".game").css('--scale-factor', 1);
+        $("body").css('--background-color', '#000');
     }
     else {
         $('#fullscreen').text('fullscreen');
-        $(".game").css('--scale-factor', 0.8);
+        $(".game").css('--scale-factor', GAME_WINDOW_SCALE_FACTOR);
+        $("body").css('--background-color', BACKGROUND_COLOR);
     }
 }

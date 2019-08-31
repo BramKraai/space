@@ -16,57 +16,40 @@ a {
 main {
 
     background-color: var(--background-color);
-
-    width: 100%;
-    height: 100%;
+    width: 100%; height: calc(100% - 55px);
 }
 
-header, footer {
-    
-    position: absolute; width: 100%;
-    padding: 5px 0 5px 0;
+header {
 
     text-align: center;
-}
 
-header { top: 0; background-color: #222; }
+    top: 0;
+    width: 100%;
+    padding: 10px 0 10px 0;
+}
 
 .title {
-    font-size: 20px;
     font-family: 'Codystar', cursive;
-}
-
-footer {
-    top: 100%;
-    position: relative;
-    color: #999;
-    font-size: 10px;
-}
-
-.github {
-    float: left;
-    padding-left: 5px;
-    opacity: 0.5;
-}
-
-#github-icon {
-    width: 14px;
-    height: 14px;
+    font-size: 30px;
 }
 
 .game {
-    position: absolute;
+
+    background-color: black;
+    box-shadow: 0px 0px 20px black;
+
+    position: relative;
     
     --scale-factor: 0.8;
 
     /* Center Vertically */
     margin: 0; top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-
-    box-shadow: 0px 0px 20px black;
 }
 
 .overlay {
+    opacity: 0.5;
+
     position: absolute;
     bottom: 5px;
     width: 100%;
@@ -74,9 +57,19 @@ footer {
 }
 
 .material-icons {
-    color: #333;
     cursor: pointer;
     font-size: 24px;
+}
+
+.github {
+    float: left;
+    padding-left: 5px;
+    padding-top: 5px;
+}
+
+#github-icon {
+    width: 20px;
+    height: 20px;
 }
 
 #fullscreen { float: right; margin-right: 5px;}

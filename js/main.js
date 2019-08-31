@@ -1,15 +1,16 @@
 'use strict';
 
 const CANVAS = $('canvas')[0];
-const RENDERER = new THREE.WebGLRenderer({canvas: CANVAS});
-const CAMERA = new THREE.PerspectiveCamera(60, 1, 0.01, 1000);
+
+var renderer = new THREE.WebGLRenderer({canvas: CANVAS});
+var camera = new THREE.PerspectiveCamera(60, 1, 0.01, 1000);
 
 
 /*  RUN GAME ON LOAD  */
 $(() => {
     $(window).trigger('resize');
 
-    game(RENDERER, CAMERA);
+    game(renderer, camera);
 });
 
 
@@ -22,9 +23,9 @@ $(window).resize(() => {
     CANVAS.width = width;
     CANVAS.height = height;
 
-    RENDERER.setSize(width, height);
-    CAMERA.aspect = width / height;
-    CAMERA.updateProjectionMatrix();
+    renderer.setSize(width, height);
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
 
     console.log(width, height);
 });

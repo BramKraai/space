@@ -9,7 +9,6 @@ var camera = new THREE.PerspectiveCamera(60, 1, 0.01, 1000);
 /*  RUN GAME ON LOAD  */
 $(() => {
     $(window).trigger('resize');
-
     game(renderer, camera);
 });
 
@@ -35,12 +34,12 @@ const GAME_WINDOW_SCALE_FACTOR = $(".game").css('--scale-factor');
 const BACKGROUND_COLOR = $("body").css('--background-color');
 
 $('#fullscreen').click(function () {
-    if (document.fullscreenElement) closeFullscreen();
+    if (getFullScreenElement()) closeFullscreen();
     else openFullscreen($('main')[0]);
 });
 
-document.documentElement.onfullscreenchange = function() {
-    if (document.fullscreenElement) {
+setFullScreenHandler(() => {
+    if (getFullScreenElement()) {
         $('#fullscreen').text('fullscreen_exit');
         $(".game").css('--scale-factor', 1);
         $("body").css('--background-color', '#000');
@@ -52,4 +51,4 @@ document.documentElement.onfullscreenchange = function() {
     }
 
     $(window).trigger('resize');
-}
+});

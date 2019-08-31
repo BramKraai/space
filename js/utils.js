@@ -20,3 +20,18 @@ function closeFullscreen() {
         document.msExitFullscreen();
     }
 }
+
+function getFullScreenElement() {
+    return document.fullscreenElement || document.msFullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
+}
+
+function setFullScreenHandler(onFullScreenChange) {
+    if (document.onfullscreenchange === null)
+        document.onfullscreenchange = onFullScreenChange;
+    else if (document.onmsfullscreenchange === null)
+        document.onmsfullscreenchange = onFullScreenChange;
+    else if (document.onmozfullscreenchange === null)
+        document.onmozfullscreenchange = onFullScreenChange;
+    else if (document.onwebkitfullscreenchange === null)
+        document.onwebkitfullscreenchange = onFullScreenChange;
+}

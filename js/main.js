@@ -1,10 +1,12 @@
 'use strict';
 
 const CANVAS = $('canvas')[0];
+const RESOLUTION_X = 1920;
+const RESOLUTION_Y = 1080;
 
 var renderer = new THREE.WebGLRenderer({canvas: CANVAS});
-var camera = new THREE.PerspectiveCamera(60, 1, 0.01, 1000);
-
+var camera = new THREE.OrthographicCamera(0, RESOLUTION_X, RESOLUTION_Y, 0, 0, 1000);
+camera.position.z = 100;
 
 /*  RUN GAME ON LOAD  */
 $(() => {
@@ -12,21 +14,18 @@ $(() => {
     game(renderer, camera);
 });
 
-
 /*      RESIZE LOGIC      */
-
 $(window).resize(() => {
+    // Get Dimensions of 'game' div
     let width = Math.floor($('.game').width());
     let height = Math.floor($('.game').height());
 
+    // Update Canvas Size
     CANVAS.width = width;
     CANVAS.height = height;
 
+    // Update Renderer Size
     renderer.setSize(width, height);
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-
-    console.log(width, height);
 });
 
 /*     FULLSCREEN LOGIC     */

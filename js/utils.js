@@ -35,3 +35,24 @@ function setFullScreenHandler(onFullScreenChange) {
     else if (document.onwebkitfullscreenchange === null)
         document.onwebkitfullscreenchange = onFullScreenChange;
 }
+
+function loadShader(url, callback) {
+    new THREE.FileLoader(THREE.DefaultLoadingManager).load(url, callback);
+}
+
+function loadShaders(vertex_url, fragment_url, callback) {
+    loadShader(vertex_url, (vertex) => {
+        loadShader(fragment_url, (fragment) => {
+            callback(vertex, fragment)
+        });
+    });
+}
+
+function loadMaterial(vertex_url, fragment_url, callback) {
+    loadShaders(vertex_url, fragment_url, (vertex, fragment) => {
+        callback(new THREE.ShaderMaterial({
+            vertexShader: vertex,
+            fragmentShader: fragment
+        }));
+    });
+}

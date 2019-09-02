@@ -3,28 +3,25 @@
 function game(renderer, camera) {
 
     /*      CREATE SCENE      */
-    const scene = new THREE.Scene();
+    var scene = new THREE.Scene();
     scene.background = new THREE.Color().setHSL(0, 0, 0);
 
-    var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-    var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-    var cube = new THREE.Mesh( geometry, material );
+    swarmInit(renderer, scene, 64);
 
-    cube.scale.setScalar(100);
-    cube.position.set(RESOLUTION_X/2, RESOLUTION_Y/2, 0);
-
-    scene.add( cube );
+    /*    CREATE COMPOSER     */
+    var composer = new THREE.EffectComposer(renderer);
+    composer.addPass(new THREE.RenderPass(scene, camera));
+    composer.addPass(new THREE.UnrealBloomPass(undefined, .2, .1, .5));
 
     function update(dt) {
-        cube.rotateX(dt);
+        swarmUpdate();
     }
 
     function render() {
-        renderer.render(scene, camera);
+        composer.render(scene, camera);
     }
 
     /*      START ANIMATION     */
-
     var clock = new THREE.Clock();
     var animate = () => {
         requestAnimationFrame(animate);

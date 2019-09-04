@@ -52,7 +52,7 @@ function swarmInit(renderer, scene, N) {
             }
             
             material.lights = false;
-            material.blending = THREE.AdditiveBlending;
+            material.blending = THREE.NormalBlending;
 
             material.uniforms = swarm_uniforms;
             scene.add(new THREE.Points(geometry, material));

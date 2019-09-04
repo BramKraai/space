@@ -5,7 +5,6 @@ const RESOLUTION_X = 1920;
 const RESOLUTION_Y = 1080;
 
 var renderer = new THREE.WebGLRenderer({canvas: CANVAS});
-renderer.setPixelRatio(window.devicePixelRatio);
 
 var camera = new THREE.OrthographicCamera(0, RESOLUTION_X, RESOLUTION_Y, 0, 0, 1000);
 camera.position.z = 100;
@@ -28,6 +27,7 @@ $(window).resize(() => {
 
     // Update Renderer Size
     renderer.setSize(width, height);
+    renderer.setPixelRatio(window.devicePixelRatio);
 });
 
 /*     FULLSCREEN LOGIC     */

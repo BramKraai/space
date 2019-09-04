@@ -2,18 +2,24 @@ const float RESOLUTION_X = 1920.0;
 const float RESOLUTION_Y = 1080.0;
 
 const float MAX_SPEED = 5.0;
-const float MAX_ACCEL = 2.0;
+const float MAX_ACCEL = 10.0;
 
-const float SEPARATION_FACTOR = 0.5;
-const float SEPARATION_THRESHOLD = 30.0;
+const float SEPARATION_FACTOR = 1.0;
+const float SEPARATION_THRESHOLD = 10.0;
+const float SEPARATION_THRESHOLD_SQ = SEPARATION_THRESHOLD * SEPARATION_THRESHOLD;
 
-const float COHESION_FACTOR = 0.3;
-const float COHESION_THRESHOLD = 50.0;
+const float COHESION_FACTOR = 0.2;
+const float COHESION_THRESHOLD = 40.0;
+const float COHESION_THRESHOLD_SQ = COHESION_THRESHOLD * COHESION_THRESHOLD;
 
-const float ALIGNMENT_FACTOR = 0.02;
-const float ALIGNMENT_THRESHOLD = 40.0;
+const float ALIGNMENT_FACTOR = 0.1;
+const float ALIGNMENT_THRESHOLD = 20.0;
+const float ALIGNMENT_THRESHOLD_SQ = ALIGNMENT_THRESHOLD * ALIGNMENT_THRESHOLD;
 
 const float CENTER_FACTOR = 0.02;
+
+const float DX = 1.0/resolution.x;
+const float DY = 1.0/resolution.y;
 
 void main() {
     vec4 boid = texture2D(swarm, gl_FragCoord.xy / resolution.xy);
@@ -25,20 +31,26 @@ void main() {
     vec2 separation_target = vec2(0, 0);
     vec2 alignment_target = vec2(0, 0);
 
-    for (float y=0.0; y<resolution.y; y++) {
-        for (float x=0.0; x<resolution.x; x++) {
-            vec4 other = texture2D(swarm, vec2(x, y) / resolution.xy);
+    for (float y=0.0; y<1.0; y+=DY) {
+        for (float x=0.0; x<1.0; x+=DX) {
+            vec4 other = texture2D(swarm, vec2(x, y));
             vec2 o_pos = other.xy;
-            vec2 o_vel = other.zw;
 
             if (pos != o_pos) {
                 vec2 diff = o_pos - pos;
-                float dist = length(diff);
-                vec2 diff_norm = diff / dist;
+                float dist_sq = diff.x * diff.x + diff.y * diff.y;
 
-                if (dist < COHESION_THRESHOLD) cohesion_target += diff_norm;            // Cohesion
-                if (dist < SEPARATION_THRESHOLD) separation_target -= diff_norm;        // Separation
-                if (dist < ALIGNMENT_THRESHOLD) alignment_target += normalize(o_vel);   // Alignment
+                if (dist_sq < COHESION_THRESHOLD_SQ) {
+
+                    float dist = sqrt(dist_sq);
+                    vec2 diff_norm = diff / dist;
+
+                    cohesion_target += diff_norm;   // Cohesion
+
+                    if (dist < SEPARATION_THRESHOLD) separation_target -= diff_norm;        // Separation
+                    if (dist < ALIGNMENT_THRESHOLD) alignment_target += normalize(other.zw);   // Alignment
+                }
+
             }
         }
     }

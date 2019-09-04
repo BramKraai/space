@@ -50,6 +50,9 @@ function swarmInit(renderer, scene, N) {
             swarm_uniforms = {
                 "swarm": { value: swarm_gpu.getCurrentRenderTarget(swarm_variable).texture }
             }
+            
+            material.lights = false;
+            material.blending = THREE.AdditiveBlending;
 
             material.uniforms = swarm_uniforms;
             scene.add(new THREE.Points(geometry, material));

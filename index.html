@@ -15,7 +15,15 @@
     <body>
 
         <header>
-                <a href="index.html"><div class="title">SPACE</div></a>
+            <div class="title"><a href="index.html">SPACE BOIDS</a>
+                {
+                    <a href="index.html?N=32">32</a>,
+                    <a href="index.html?N=48">48</a>,
+                    <a href="index.html?N=64">64</a>,
+                    <a href="index.html?N=96">96</a>,
+                    <a href="index.html?N=128">128</a>
+                }
+            </div>
         </header>
 
         <main>
@@ -25,6 +33,7 @@
 
                 <div class="overlay">
                     <a href="https://github.com/BramKraai/space"><div class="github"><img id="github-icon" src="img/GitHub-Mark-Light-64px.png"></div></a>
+                
                     <i id="fullscreen" class="material-icons">fullscreen</i>
                 </div>
             </div>
@@ -35,18 +44,7 @@
         
         <script src="js/vendor/GPUComputationRenderer.js"></script>
 
-        <script src="js/vendor/shaders/CopyShader.js"></script>
-        <script src="js/vendor/shaders/LuminosityHighPassShader.js"></script>
-        <script src="js/vendor/shaders/BokehShader.js"></script>
-      
-        <script src="js/vendor/postprocessing/EffectComposer.js"></script>
-        <script src="js/vendor/postprocessing/RenderPass.js"></script>
-        <script src="js/vendor/postprocessing/ShaderPass.js"></script>
-        <script src="js/vendor/postprocessing/UnrealBloomPass.js"></script>
-        <script src="js/vendor/postprocessing/BokehPass.js"></script>
-
         <script src="js/utils.js"></script>
-        <script src="js/vector.js"></script>
         <script src="js/swarm.js"></script>
         <script src="js/game.js"></script>
         <script src="js/main.js"></script>

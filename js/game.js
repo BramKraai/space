@@ -6,7 +6,7 @@ function game(renderer, camera) {
     var scene = new THREE.Scene();
     scene.background = new THREE.Color().setHSL(0, 0, 0);
 
-    swarmInit(renderer, scene, 100);
+    swarmInit(renderer, scene, parseInt(getUrlParameter('N') || 96));
 
     function update(dt) {
         swarmUpdate();

@@ -2,7 +2,7 @@ const float RESOLUTION_X = 1920.0;
 const float RESOLUTION_Y = 1080.0;
 
 const float MAX_SPEED = 5.0;
-const float MAX_ACCEL = 10.0;
+const float MAX_ACCEL = 100.0;
 
 const float SEPARATION_FACTOR = 1.0;
 const float SEPARATION_THRESHOLD = 10.0;

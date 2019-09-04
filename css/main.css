@@ -14,7 +14,7 @@ a {
 }
 
 a:hover {
-    opacity: 0.8;
+    opacity: 0.75;
 }
 
 main {
@@ -40,7 +40,7 @@ header {
 .game {
 
     background-color: black;
-    box-shadow: 0px 0px 20px black;
+    box-shadow: 0px 0px 100px black;
 
     position: relative;
     

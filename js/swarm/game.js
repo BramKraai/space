@@ -1,24 +1,6 @@
 'use strict';
 
-// const CUBE_VERTICES = [
-//     -1, -1, -1,    1, -1, -1,    1,  1, -1,    -1,  1, -1,
-//     -1, -1,  1,    1, -1,  1,    1,  1,  1,    -1,  1,  1,
-// ];
-// const CUBE_FACES = [
-//     2, 1, 0,    0, 3, 2,
-//     0, 4, 7,    7, 3, 0,
-//     0, 1, 5,    5, 4, 0,
-//     1, 2, 6,    6, 5, 1,
-//     2, 3, 7,    7, 6, 2,
-//     4, 5, 6,    6, 7, 4,
-// ];
-
-// var geometry = new THREE.PolyhedronBufferGeometry(CUBE_VERTICES, CUBE_FACES, 100, 4);
-// var sphere = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({color: 0xFF00FF}));
-// sphere.position.set(RESOLUTION_X/2, RESOLUTION_Y/2, 0);
-// scene.add(sphere);
-
-function swarmSimulation(renderer) {
+function game(renderer) {
 
     var camera = new THREE.OrthographicCamera(0, RESOLUTION_X, RESOLUTION_Y, 0, 0, 1000);
     camera.position.z = 100;

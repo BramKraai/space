@@ -9,7 +9,7 @@ var renderer = new THREE.WebGLRenderer({canvas: CANVAS});
 /*  RUN GAME ON LOAD  */
 $(() => {
     $(window).trigger('resize');
-    swarmSimulation(renderer);
+    game(renderer);
 });
 
 /*      RESIZE LOGIC      */

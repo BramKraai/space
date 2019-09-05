@@ -17,28 +17,26 @@
         <header>
             <div class="title"><a href="index.html">SPACE BOIDS</a>
                 {
-                    <a href="index.html?N=32">32</a>,
-                    <a href="index.html?N=48">48</a>,
-                    <a href="index.html?N=64">64</a>,
-                    <a href="index.html?N=96">96</a>,
-                    <a href="index.html?N=128">128</a>
+                    <a href="index.html?N=32">32<sup>2</sup></a>,
+                    <a href="index.html?N=48">48<sup>2</sup></a>,
+                    <a href="index.html?N=64">64<sup>2</sup></a>,
+                    <a href="index.html?N=96">96<sup>2</sup></a>,
+                    <a href="index.html?N=128">128<sup>2</sup></a>
                 }
             </div>
         </header>
 
         <main>
             <div class="game">
-
                 <canvas class="canvas" id="canvas"></canvas>
-
                 <div class="overlay">
                     <a href="https://github.com/BramKraai/space"><div class="github"><img id="github-icon" src="img/GitHub-Mark-Light-64px.png"></div></a>
-                
                     <i id="fullscreen" class="material-icons">fullscreen</i>
                 </div>
             </div>
         </main>
         
+        <!-- Load a lot of scripts -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js"></script>
         
@@ -55,8 +53,8 @@
         <script src="js/vendor/postprocessing/UnrealBloomPass.js"></script>
 
         <script src="js/utils.js"></script>
-        <script src="js/swarm.js"></script>
-        <script src="js/game.js"></script>
+        <script src="js/swarm/swarm.js"></script>
+        <script src="js/swarm/game.js"></script>
         <script src="js/main.js"></script>
 
     </body>

@@ -6,13 +6,10 @@ const RESOLUTION_Y = 1080;
 
 var renderer = new THREE.WebGLRenderer({canvas: CANVAS});
 
-var camera = new THREE.OrthographicCamera(0, RESOLUTION_X, RESOLUTION_Y, 0, 0, 1000);
-camera.position.z = 100;
-
 /*  RUN GAME ON LOAD  */
 $(() => {
     $(window).trigger('resize');
-    game(renderer, camera);
+    swarmSimulation(renderer);
 });
 
 /*      RESIZE LOGIC      */

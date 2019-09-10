@@ -20,14 +20,16 @@ function game(renderer) {
     scene.add(sun);
 
     scene.add(createStars(1000, 500));
-
-    var geometry = new THREE.IcosahedronGeometry(2, 7);
+    
+    var geometry = icosphere(7);
     var planet = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({color: 0xFFFFFF}));
 
     deformTerrain(planet);
 
     scene.add(planet);
-    
+
+    // scene.add(new THREE.LineSegments(new THREE.WireframeGeometry(geometry), new THREE.LineBasicMaterial({color: 0xFFFFFF})));
+
     function update(dt) {
         controls.update();
     }
@@ -43,32 +45,36 @@ function game(renderer) {
     animate();
 }
 
-function deformTerrain(planet, amplitude=0.05, frequency=0.2, octaves=16, persistence=0.6) {
+function deformTerrain(planet, amplitude=0.5, frequency=0.01, octaves=32, persistence=0.6) {
     var noise = new SimplexNoise();
 
-    var vertices = planet.geometry.vertices;
+    var vertices = planet.geometry.attributes.position.array;
 
-    for (let vertex of vertices) {
+    for (let i=0; i<vertices.length; i+=3) {
 
-        let _amplitude = amplitude;
-        let _frequency = frequency;
+        let _amplitude = amplitude, _frequency = frequency, offset = 0;
 
-        let offset = 0;
-        for (let i=0; i<octaves; i++){
-            offset += _amplitude * noise.noise3D(_frequency * vertex.x, _frequency * vertex.y, _frequency * vertex.z);
+        for (let j=0; j<octaves; j++){
+            offset += _amplitude * noise.noise3D(_frequency * vertices[i], _frequency * vertices[i+1], _frequency * vertices[i+2]);
             _amplitude *= persistence;
             _frequency *= 2.0;
         }
 
-        if (offset > 0)
-            vertex.add(new THREE.Vector3(vertex.x * offset, vertex.y * offset, vertex.z * offset));
+        vertices[i+0] += vertices[i+0] * offset;
+        vertices[i+1] += vertices[i+1] * offset;
+        vertices[i+2] += vertices[i+2] * offset;
     }
 
+    planet.geometry.computeFaceNormals();
     planet.geometry.computeVertexNormals();
+
+    planet.geometry.attributes.position.needsUpdate = true;
+    planet.geometry.attributes.normal.needsUpdate = true;
 }
 
 function createStars(n, r) {
     var stars = new THREE.Geometry();
+
     for (let i=0; i<n; i++) {
 
         // Random Position (Spherical Coordinates)
@@ -83,4 +89,17 @@ function createStars(n, r) {
     }
 
     return new THREE.Points(stars, new THREE.PointsMaterial({size: 1, color: 0xFFFFFF, sizeAttenuation: false}));
+}
+
+function grid(size=10, gridColor = 0x444444) {
+    let grid = new THREE.Object3D();
+
+    grid.add(new THREE.GridHelper(size, 10, gridColor));
+    grid.add(new THREE.GridHelper(size, 10, gridColor).rotateX(Math.PI/2));
+    grid.add(new THREE.GridHelper(size, 10, gridColor).rotateZ(Math.PI/2));
+    grid.add(new THREE.ArrowHelper(new THREE.Vector3(1, 0, 0), new THREE.Vector3(), size/2, 0xFF0000));
+    grid.add(new THREE.ArrowHelper(new THREE.Vector3(0, 1, 0), new THREE.Vector3(), size/2, 0x00FF00));
+    grid.add(new THREE.ArrowHelper(new THREE.Vector3(0, 0, 1), new THREE.Vector3(), size/2, 0x0000FF));
+
+    return grid;
 }

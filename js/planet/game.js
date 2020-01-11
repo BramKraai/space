@@ -19,10 +19,13 @@ function game(renderer) {
     sun.position.set(-1, 1, 1);
     scene.add(sun);
 
+    var ambient = new THREE.AmbientLight(0x010101);
+    scene.add(ambient);
+
     scene.add(createStars(1000, 500));
     
     var geometry = icosphere(7);
-    var planet = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({color: 0xFFFFFF}));
+    var planet = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({color: 0xFFFFFF}));
 
     deformTerrain(planet);
 
@@ -45,7 +48,7 @@ function game(renderer) {
     animate();
 }
 
-function deformTerrain(planet, amplitude=0.5, frequency=0.01, octaves=32, persistence=0.6) {
+function deformTerrain(planet, amplitude=0.01, frequency=1, octaves=32, persistence=0.6) {
     var noise = new SimplexNoise();
 
     var vertices = planet.geometry.attributes.position.array;
@@ -60,12 +63,13 @@ function deformTerrain(planet, amplitude=0.5, frequency=0.01, octaves=32, persis
             _frequency *= 2.0;
         }
 
+        offset = Math.max(offset, 0);
+
         vertices[i+0] += vertices[i+0] * offset;
         vertices[i+1] += vertices[i+1] * offset;
         vertices[i+2] += vertices[i+2] * offset;
     }
 
-    planet.geometry.computeFaceNormals();
     planet.geometry.computeVertexNormals();
 
     planet.geometry.attributes.position.needsUpdate = true;
